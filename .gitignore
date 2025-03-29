@@ -1,5 +1,3 @@
-/target
 .env
-uploads/*
-prisma*.rs
-prisma-cli/target
+**/target
+.bacon-locations

@@ -1,0 +1,24 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+thiserror.workspace = true
+actix-web.workspace = true
+actix_error_proc.workspace = true
+flexi_logger.workspace = true
+oauth2 = "5.0.0"
+actix-identity = "0.8.0"
+eserde.workspace = true
+
+[dependencies.macros_utils]
+path = "../crates/macros_utils"
+default-features = false
+features = ["actix"]
+
+[dependencies.logger]
+path = "../crates/logger"
+
+[dependencies.database]
+path = "../crates/database"
