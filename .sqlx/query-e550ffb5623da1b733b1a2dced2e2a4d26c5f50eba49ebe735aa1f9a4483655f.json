@@ -1,0 +1,50 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n                UPDATE users\n                SET\n                    username = COALESCE($1, username),\n                    email = COALESCE($2, email),\n                    password = CASE\n                        WHEN $3::TEXT IS NOT NULL\n                            AND (password IS NULL OR crypt($4::TEXT, password) = password)\n                        THEN crypt($3::TEXT, gen_salt('bf'))\n                        ELSE password\n                    END\n                WHERE\n                    id = $5\n                AND \n                    ($3::TEXT IS NULL OR crypt($3::TEXT, password) = password)\n                RETURNING *\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "username",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "email",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 3,
+        "name": "password",
+        "type_info": "Varchar"
+      },
+      {
+        "ordinal": 4,
+        "name": "created_at",
+        "type_info": "Timestamp"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Text",
+        "Text",
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "e550ffb5623da1b733b1a2dced2e2a4d26c5f50eba49ebe735aa1f9a4483655f"
+}

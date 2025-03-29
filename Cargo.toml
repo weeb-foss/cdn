@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = ["crates/*", "server"]
+
+[workspace.dependencies]
+# Misc
+dotenvy = "0.15.7"
+chrono = { version = "0.4.39", features = ["serde"] }
+thiserror = "2.0.11"
+
+# Serde
+eserde = { version = "0.1.2", features = ["json"] }
+serde = "1.0.219"
+
+# Database
+sqlx = { version = "0.8.3", features = ["chrono", "postgres", "runtime-tokio"] }
+
+# Server
+actix-web = "4.10.2"
+flexi_logger = "0.29.8"
+actix_error_proc = "1.1.4"
